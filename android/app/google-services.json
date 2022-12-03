@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "25424071279",
+    "project_id": "placementor-5b113",
+    "storage_bucket": "placementor-5b113.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:25424071279:android:93d26a99b62d773e705b9a",
+        "android_client_info": {
+          "package_name": "com.example.palcmentor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "25424071279-1mi5terq7u1lqv35gb5kl77jnhg1s976.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkBZ4DoSx2-vO0Nifk6xqDTsUVXQagZ-s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "25424071279-1mi5terq7u1lqv35gb5kl77jnhg1s976.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
