@@ -110,134 +110,146 @@ class _MyLoginState extends State<MyLogin> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         image: DecorationImage(
             image: AssetImage('assets/images/login_back2.jpg'),
             fit: BoxFit.cover),
       ),
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: Stack(
-          children: [
-            Container(
-              padding: EdgeInsets.only(left: 35, top: 130),
-              child: Text(
-                'Welcome\nBack',
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Pacifico',
-                    color: Color.fromARGB(255, 248, 170, 3),
-                    fontSize: 35),
+      child: Container(
+        decoration: const BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.center,
+                end: Alignment.bottomCenter,
+                colors: [
+              Color.fromARGB(101, 0, 0, 0),
+              Color.fromARGB(229, 0, 0, 0)
+            ])),
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          body: SingleChildScrollView(
+            child: Container(
+              padding: EdgeInsets.only(
+                top: (MediaQuery.of(context).size.height * 0.1),
               ),
-            ),
-            SingleChildScrollView(
-              child: Container(
-                padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height * 0.5),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(left: 35, right: 35),
-                      child: Column(
-                        children: [
-                          TextFormField(
-                            style: TextStyle(color: Colors.black),
-                            keyboardType: TextInputType.emailAddress,
-                            decoration: InputDecoration(
-                                fillColor: Color.fromARGB(105, 245, 245, 245),
-                                filled: true,
-                                hintText: "Email",
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                )),
-                            controller: inputEmail,
-                            onFieldSubmitted: (_) => SignIn(),
-                          ),
-                          SizedBox(
-                            height: 30,
-                          ),
-                          TextFormField(
-                            style: TextStyle(),
-                            obscureText: true,
-                            decoration: InputDecoration(
-                                fillColor: Color.fromARGB(105, 245, 245, 245),
-                                filled: true,
-                                hintText: "Password",
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                )),
-                            controller: inputPassword,
-                            onFieldSubmitted: (_) => SignIn(),
-                          ),
-                          SizedBox(
-                            height: 40,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Sign in',
-                                style: TextStyle(
-                                    color: Color.fromARGB(255, 248, 170, 3),
-                                    fontFamily: 'Pacifico',
-                                    fontSize: 27,
-                                    fontWeight: FontWeight.w700),
-                              ),
-                              CircleAvatar(
-                                radius: 30,
-                                backgroundColor: Color(0xff4c505b),
-                                child: IconButton(
-                                    color: Colors.white,
-                                    onPressed: () {
-                                      SignIn();
-                                      // Navigator.push(
-                                      //     context,
-                                      //     MaterialPageRoute(
-                                      //         builder: (context) =>
-                                      //             MyHomePage()));
-                                    },
-                                    // {
-                                    //   Navigator.push(
-                                    //       context,
-                                    //       MaterialPageRoute(
-                                    //           builder: (context) =>
-                                    //               MyHomePage()));
-                                    // },
-                                    icon: Icon(
-                                      Icons.arrow_forward,
-                                    )),
-                              )
-                            ],
-                          ),
-                          SizedBox(
-                            height: 40,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              TextButton(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    padding: EdgeInsets.only(
+                      left: 35,
+                    ),
+                    child: Text(
+                      'Welcome\nBack',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Pacifico',
+                          color: Color.fromARGB(255, 248, 170, 3),
+                          fontSize: MediaQuery.of(context).size.height * 0.04),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(
+                        top: MediaQuery.of(context).size.height * 0.2,
+                        left: 35,
+                        right: 35),
+                    child: Column(
+                      children: [
+                        TextFormField(
+                          style: TextStyle(color: Colors.black),
+                          keyboardType: TextInputType.emailAddress,
+                          decoration: InputDecoration(
+                              fillColor: Color.fromARGB(105, 245, 245, 245),
+                              filled: true,
+                              hintText: "Email",
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              )),
+                          controller: inputEmail,
+                          onFieldSubmitted: (_) => SignIn(),
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.025,
+                        ),
+                        TextFormField(
+                          style: TextStyle(),
+                          obscureText: true,
+                          decoration: InputDecoration(
+                              fillColor: Color.fromARGB(105, 245, 245, 245),
+                              filled: true,
+                              hintText: "Password",
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              )),
+                          controller: inputPassword,
+                          onFieldSubmitted: (_) => SignIn(),
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.05,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text(
+                              'Sign in',
+                              style: TextStyle(
+                                  color: Color.fromARGB(255, 248, 170, 3),
+                                  fontFamily: 'Pacifico',
+                                  fontSize: 27,
+                                  fontWeight: FontWeight.w700),
+                            ),
+                            CircleAvatar(
+                              radius: 30,
+                              backgroundColor: Color(0xff4c505b),
+                              child: IconButton(
+                                  color: Colors.white,
                                   onPressed: () {
-                                    openTransectionInputBar(context);
+                                    SignIn();
+                                    // Navigator.push(
+                                    //     context,
+                                    //     MaterialPageRoute(
+                                    //         builder: (context) =>
+                                    //             MyHomePage()));
                                   },
-                                  child: Text(
-                                    'Forgot Password',
-                                    style: TextStyle(
-                                      decoration: TextDecoration.underline,
-                                      color: Color(0xff4c505b),
-                                      fontSize: 18,
-                                    ),
+                                  // {
+                                  //   Navigator.push(
+                                  //       context,
+                                  //       MaterialPageRoute(
+                                  //           builder: (context) =>
+                                  //               MyHomePage()));
+                                  // },
+                                  icon: const Icon(
+                                    Icons.arrow_forward,
                                   )),
-                            ],
-                          )
-                        ],
-                      ),
-                    )
-                  ],
-                ),
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.04,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            TextButton(
+                                onPressed: () {
+                                  openTransectionInputBar(context);
+                                },
+                                child: const Text(
+                                  'Forgot Password',
+                                  style: TextStyle(
+                                    decoration: TextDecoration.underline,
+                                    color: Color(0xff4c505b),
+                                    fontSize: 18,
+                                  ),
+                                )),
+                          ],
+                        )
+                      ],
+                    ),
+                  )
+                ],
               ),
             ),
-          ],
+          ),
         ),
       ),
     );

@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
               return Center(
                 child: Container(
                   width: double.maxFinite,
-                  height: 500,
+                  height: 400,
                   child: SpinKitThreeInOut(
                     itemBuilder: (BuildContext context, int index) {
                       return DecoratedBox(
