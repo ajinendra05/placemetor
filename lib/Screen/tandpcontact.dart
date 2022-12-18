@@ -46,26 +46,29 @@ class _TandPState extends State<TandP> {
     //     print("object ${teacherDetails[0].name},${teacherDetails[0]}");
     //   });
     // });
+    final appbar = AppBar(
+      backgroundColor: Color.fromARGB(120, 96, 96, 93),
+      title: Container(
+        height: 45,
+        width: double.infinity,
+        alignment: Alignment.centerLeft,
+        child: Text(
+          'T&P Coordinators',
+          style: TextStyle(
+              fontWeight: FontWeight.normal,
+              fontSize: 25,
+              fontFamily: 'Pacifico',
+              color: Color.fromARGB(255, 9, 8, 8)),
+        ),
+      ),
+    );
 
+    final mq = MediaQuery.of(context);
+    final avlH = mq.size.height - appbar.preferredSize.height - mq.padding.top;
     return Scaffold(
+      appBar: appbar,
       body: Column(
         children: [
-          SizedBox(
-            height: 50,
-          ),
-          Card(
-            elevation: 10,
-            margin: EdgeInsets.all(5),
-            child: Container(
-              height: 45,
-              width: 230,
-              alignment: Alignment.center,
-              child: Text(
-                'T&P Coordinators',
-                style: TextStyle(fontSize: 25, fontFamily: 'Pacifico'),
-              ),
-            ),
-          ),
           SizedBox(
             height: 20,
           ),
@@ -91,7 +94,7 @@ class _TandPState extends State<TandP> {
           // ),
           Container(
               height: 200,
-              width: 500,
+              width: mq.size.width,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (BuildContext context, int index) {
@@ -112,3 +115,22 @@ class _TandPState extends State<TandP> {
     );
   }
 }
+
+
+
+// SizedBox(
+//             height: 50,
+//           ),
+//           Card(
+//             elevation: 10,
+//             margin: EdgeInsets.all(5),
+//             child: Container(
+//               height: 45,
+//               width: 230,
+//               alignment: Alignment.center,
+//               child: Text(
+//                 'T&P Coordinators',
+//                 style: TextStyle(fontSize: 25, fontFamily: 'Pacifico'),
+//               ),
+//             ),
+//           ),

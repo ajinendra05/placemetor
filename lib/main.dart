@@ -4,10 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:palcmentor/Screen/home.dart';
 import 'package:palcmentor/tabs_screen.dart';
-import 'Screen/login.dart';
-import 'Screen/profile.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
+
+import 'Screen/login.dart';
+import 'Screen/profile.dart';
+
 // import 'dart:html';
 
 // import 'screens/home.dart';
@@ -21,46 +24,62 @@ Future<void> main() async {
 
 final navigatorKey = GlobalKey<NavigatorState>();
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   MyApp({super.key});
 
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  bool _isdark = false;
+  void setTheme(bool isDark) {
+    setState(() {
+      _isdark = isDark;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
     return MaterialApp(
-        navigatorKey: navigatorKey,
-        title: 'PLACEMENTOR',
-        debugShowCheckedModeBanner: false,
-        theme: lightTheme,
-        home: StreamBuilder(
-          stream: FirebaseAuth.instance.authStateChanges(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(
-                child: Container(
-                  width: double.maxFinite,
-                  height: 400,
-                  child: SpinKitThreeInOut(
-                    itemBuilder: (BuildContext context, int index) {
-                      return DecoratedBox(
-                        decoration: BoxDecoration(
-                          color: index.isEven ? Colors.red : Colors.green,
-                        ),
-                      );
-                    },
-                  ),
+      navigatorKey: navigatorKey,
+      title: 'PLACEMENTOR',
+      debugShowCheckedModeBanner: false,
+      theme: _isdark ? darkTheme : lightTheme,
+      home: StreamBuilder(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(
+              child: Container(
+                width: double.maxFinite,
+                height: 400,
+                child: SpinKitThreeInOut(
+                  itemBuilder: (BuildContext context, int index) {
+                    return DecoratedBox(
+                      decoration: BoxDecoration(
+                        color: index.isEven ? Colors.red : Colors.green,
+                      ),
+                    );
+                  },
                 ),
-              );
-            } else if (snapshot.hasError) {
-              return Center(
-                child: Text(
-                    'SOMETHING WENT WRONG :( \n PLEASE CHECK CONNECTION AND COME BACK AGIAN !!'),
-              );
-            } else if (snapshot.hasData) {
-              return MyHomePage();
-            } else {
-              return MyLogin();
-            }
-          },
-        ));
+              ),
+            );
+          } else if (snapshot.hasError) {
+            return Center(
+              child: Text(
+                  'SOMETHING WENT WRONG :( \n PLEASE CHECK CONNECTION AND COME BACK AGIAN !!'),
+            );
+          } else if (snapshot.hasData) {
+            return MyHomePage();
+          } else {
+            return MyLogin();
+          }
+        },
+      ),
+      routes: {MyProfile.routeName: (context) => MyProfile()},
+    );
   }
 }

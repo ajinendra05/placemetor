@@ -15,7 +15,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'login.dart';
 
 class MyProfile extends StatelessWidget {
+  static const routeName = '/MyProfile';
   MyProfile({super.key});
+  bool isDark = false;
+  // Function changeTheem;
   // List<Map<String, Object>> contentList = [
   //   {'icon': Icons.add_card_outlined, 'title': 'To-Do'},
   //   {'icon': Icons.add_card_outlined, 'title': 'To-Do'},
@@ -43,7 +46,30 @@ class MyProfile extends StatelessWidget {
         }
       });
     });
+
+    final appbar = AppBar(
+      backgroundColor: Color.fromARGB(120, 96, 96, 93),
+      // actions: [SwitchListTile(value: isDark, onChanged: onChanged)],
+      title: Container(
+        height: 45,
+        width: double.infinity,
+        alignment: Alignment.center,
+        child: Text(
+          'Profile',
+          style: TextStyle(
+              fontWeight: FontWeight.normal,
+              fontSize: 25,
+              fontFamily: 'Pacifico',
+              color: Color.fromARGB(255, 9, 8, 8)),
+        ),
+      ),
+    );
+
+    final mq = MediaQuery.of(context);
+    final avlH =
+        mq.size.height - appbar.preferredSize.height - mq.padding.top - 55;
     return Scaffold(
+        appBar: appbar,
         body: StreamBuilder(
             stream: FirebaseFirestore.instance
                 .collection('userDetails')
@@ -74,28 +100,12 @@ class MyProfile extends StatelessWidget {
               // print("$_uname username");
               return Column(
                 children: [
-                  SizedBox(
-                    height: 50,
-                  ),
-                  Card(
-                    elevation: 10,
-                    margin: EdgeInsets.all(5),
-                    child: Container(
-                      height: 50,
-                      width: 150,
-                      alignment: Alignment.center,
-                      child: Text(
-                        'Profile',
-                        style: TextStyle(fontSize: 30, fontFamily: 'Pacifico'),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Card(
                     elevation: 7,
-                    shadowColor: Color.fromARGB(255, 129, 129, 127),
+                    shadowColor: const Color.fromARGB(255, 129, 129, 127),
                     child: Row(
                       children: [
                         Container(
@@ -112,7 +122,7 @@ class MyProfile extends StatelessWidget {
                             Text(
                               _uname,
                               textAlign: TextAlign.center,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontFamily: 'LibreBaskerville',
                                 fontWeight: FontWeight.bold,
                                 fontSize: 26,
@@ -121,7 +131,7 @@ class MyProfile extends StatelessWidget {
                             Text(
                               _enroll,
                               textAlign: TextAlign.center,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontFamily: 'Merriweather',
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18,
@@ -132,7 +142,7 @@ class MyProfile extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   InkWell(
@@ -141,15 +151,15 @@ class MyProfile extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (_) => ToDoList(),
+                            builder: (_) => const ToDoList(),
                           ));
                     },
-                    child: ProfileContent(
+                    child: const ProfileContent(
                       contentIcon: Icons.add_card_outlined,
                       contentTitle: 'To-Do',
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   InkWell(
@@ -161,12 +171,12 @@ class MyProfile extends StatelessWidget {
                             builder: (_) => TandP(),
                           ));
                     },
-                    child: ProfileContent(
+                    child: const ProfileContent(
                       contentIcon: Icons.contact_page_outlined,
                       contentTitle: 'T&P Cordinator',
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   InkWell(
@@ -178,12 +188,12 @@ class MyProfile extends StatelessWidget {
                             builder: (_) => raiseATicket(),
                           ));
                     },
-                    child: ProfileContent(
+                    child: const ProfileContent(
                       contentIcon: Icons.message_outlined,
                       contentTitle: 'Raise a Ticket',
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   InkWell(
@@ -196,7 +206,7 @@ class MyProfile extends StatelessWidget {
                         // ));
                         FirebaseAuth.instance.signOut();
                       },
-                      child: ProfileContent(
+                      child: const ProfileContent(
                         contentIcon: Icons.logout_outlined,
                         contentTitle: 'Log Out',
                       )),
@@ -205,3 +215,26 @@ class MyProfile extends StatelessWidget {
             }));
   }
 }
+
+
+
+
+
+
+
+//  SizedBox(
+//                     height: 50,
+//                   ),
+//                   Card(
+//                     elevation: 10,
+//                     margin: EdgeInsets.all(5),
+//                     child: Container(
+//                       height: 50,
+//                       width: 150,
+//                       alignment: Alignment.center,
+//                       child: Text(
+//                         'Profile',
+//                         style: TextStyle(fontSize: 30, fontFamily: 'Pacifico'),
+//                       ),
+//                     ),
+//                   ),

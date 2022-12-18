@@ -20,28 +20,33 @@ class FavoritList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     FavListGenerator();
+    final appbar = AppBar(
+      backgroundColor: Color.fromARGB(120, 96, 96, 93),
+      title: Container(
+        height: 45,
+        width: double.infinity,
+        alignment: Alignment.center,
+        child: Text(
+          'Field Of Interest',
+          style: TextStyle(
+              fontWeight: FontWeight.normal,
+              fontSize: 25,
+              fontFamily: 'Pacifico',
+              color: Color.fromARGB(255, 9, 8, 8)),
+        ),
+      ),
+    );
+
+    final mq = MediaQuery.of(context);
+    final avlH =
+        mq.size.height - appbar.preferredSize.height - mq.padding.top - 55;
     return Scaffold(
+      appBar: appbar,
       body: Column(
         children: [
-          SizedBox(
-            height: 50,
-          ),
-          Card(
-            elevation: 10,
-            margin: EdgeInsets.all(5),
-            child: Container(
-              height: 45,
-              width: 230,
-              alignment: Alignment.center,
-              child: Text(
-                'Field Of Interest',
-                style: TextStyle(fontSize: 25, fontFamily: 'Pacifico'),
-              ),
-            ),
-          ),
           Container(
-            width: 500,
-            height: 600,
+            width: double.infinity,
+            height: avlH,
             child: ListView(
               children: [
                 ...favoriteIntern.map((e) {
@@ -55,3 +60,39 @@ class FavoritList extends StatelessWidget {
     );
   }
 }
+
+
+
+
+
+// SizedBox(
+          //   height: 50,
+          // ),
+          // Card(
+          //   elevation: 10,
+          //   margin: EdgeInsets.all(5),
+          //   child: Container(
+          //     height: 45,
+          //     width: 230,
+          //     alignment: Alignment.center,
+          //     child: Text(
+          //       'Field Of Interest',
+          //       style: TextStyle(fontSize: 25, fontFamily: 'Pacifico'),
+          //     ),
+          //   ),
+          // ),
+
+
+        //     Card(
+        //   elevation: 10,
+        //   margin: EdgeInsets.all(5),
+        //   child: Container(
+        //     height: 45,
+        //     width: 230,
+        //     alignment: Alignment.center,
+        //     child: Text(
+        //       'Field Of Interest',
+        //       style: TextStyle(fontSize: 25, fontFamily: 'Pacifico'),
+        //     ),
+        //   ),
+        // ),

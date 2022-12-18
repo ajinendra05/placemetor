@@ -28,70 +28,76 @@ class _raiseATicketState extends State<raiseATicket> {
 
   @override
   Widget build(BuildContext context) {
+    final appbar = AppBar(
+      backgroundColor: Color.fromARGB(120, 96, 96, 93),
+      title: Container(
+        height: 45,
+        width: double.infinity,
+        alignment: Alignment.centerLeft,
+        child: const Text(
+          'Your Concern',
+          style: TextStyle(
+              fontWeight: FontWeight.normal,
+              fontSize: 25,
+              fontFamily: 'Pacifico',
+              color: Color.fromARGB(255, 9, 8, 8)),
+        ),
+      ),
+    );
+    final mq = MediaQuery.of(context);
+    final avlH = mq.size.height - appbar.preferredSize.height - mq.padding.top;
+
     return Scaffold(
-      body: Container(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(
-              height: 50,
-            ),
-            Card(
-              elevation: 10,
-              margin: EdgeInsets.all(5),
-              child: Container(
-                height: 45,
-                width: 230,
-                alignment: Alignment.center,
-                child: Text(
-                  'Your Concern',
-                  style: TextStyle(fontSize: 25, fontFamily: 'Pacifico'),
+      appBar: appbar,
+      body: SingleChildScrollView(
+        child: Container(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: 20,
+              ),
+              Text(
+                'Want to tell us about a missing or \n incorrect information?\n \(or\) \n Want to suggest us a new feature? \n \(or\) \nWant to give feedback or complaint?\n\n This is the right place ',
+                style: TextStyle(
+                  fontSize: 20,
                 ),
+                textAlign: TextAlign.center,
               ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Text(
-              'Want to tell us about a missing or \n incorrect information?\n \(or\) \n Want to suggest us a new feature? \n \(or\) \nWant to give feedback or complaint?\n\n This is the right place ',
-              style: TextStyle(
-                fontSize: 20,
+              TextFormField(
+                decoration: const InputDecoration(labelText: 'Title'),
+                controller: inputTitle,
+                onFieldSubmitted: (_) => submitData(),
               ),
-              textAlign: TextAlign.center,
-            ),
-            TextFormField(
-              decoration: const InputDecoration(labelText: 'Title'),
-              controller: inputTitle,
-              onFieldSubmitted: (_) => submitData(),
-            ),
-            TextFormField(
-              decoration: const InputDecoration(
-                labelText: 'Description',
+              TextFormField(
+                decoration: const InputDecoration(
+                  labelText: 'Description',
+                ),
+                controller: inputDescription,
+                onFieldSubmitted: (_) => submitData(),
               ),
-              controller: inputDescription,
-              onFieldSubmitted: (_) => submitData(),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Card(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12.0),
+              SizedBox(
+                height: 10,
               ),
-              color: Color.fromARGB(253, 108, 0, 0),
-              child: TextButton(
-                onPressed: () => submitData(),
-                child: const Text(
-                  'Raise A Ticket',
-                  style: TextStyle(
-                    fontFamily: 'Oswald',
-                    color: Color.fromARGB(255, 245, 237, 4),
-                    fontSize: 20,
+              Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.0),
+                ),
+                color: Color.fromARGB(253, 108, 0, 0),
+                child: TextButton(
+                  onPressed: () => submitData(),
+                  child: const Text(
+                    'Raise A Ticket',
+                    style: TextStyle(
+                      fontFamily: 'Oswald',
+                      color: Color.fromARGB(255, 245, 237, 4),
+                      fontSize: 20,
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

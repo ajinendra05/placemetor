@@ -105,53 +105,58 @@ class _HomePageState extends State<HomePage> {
     // }
     // print(favoriteIntern);
     // print(interndetailsList[2].isfavorite);
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.grey.shade900,
-        title: Container(
-          height: 38,
-          child: ElevatedButton(
-            // controller: searchValue,
-            child: Row(
-              children: [
-                Icon(
-                  Icons.search,
-                  color: Colors.grey.shade500,
-                ),
-                Text(
-                  "Search users",
-                  style: TextStyle(
-                      fontSize: 14, color: Color.fromARGB(255, 153, 146, 146)),
-                )
-              ],
-            ),
-            // onChanged: (_) => onSearch(),
-            onPressed: () {
-              showSearch(
-                  context: context,
-                  delegate: CustomSearchDelegate(
-                      suggestedDetailsList: widget.interndetailsList));
-            },
-            style: ButtonStyle(
-              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(18.0),
-                ),
+    final appbar = AppBar(
+      elevation: 0,
+      backgroundColor: Colors.grey.shade900,
+      title: Container(
+        height: 40,
+        child: ElevatedButton(
+          // controller: searchValue,
+          child: Row(
+            children: [
+              Icon(
+                Icons.search,
+                color: Colors.grey.shade500,
               ),
-              backgroundColor: MaterialStatePropertyAll<Color>(
-                  Color.fromARGB(255, 71, 71, 71)),
-            ),
-            // border: OutlineInputBorder(
-            //     borderRadius: BorderRadius.circular(50),
-            //     borderSide: BorderSide.none),
+              Text(
+                "Search Field",
+                style: TextStyle(fontSize: 14, color: Colors.grey.shade500),
+              )
+            ],
           ),
+          // onChanged: (_) => onSearch(),
+          onPressed: () {
+            showSearch(
+                context: context,
+                delegate: CustomSearchDelegate(
+                    suggestedDetailsList: widget.interndetailsList));
+          },
+          style: ButtonStyle(
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(18.0),
+              ),
+            ),
+            backgroundColor: MaterialStatePropertyAll<Color>(
+                Color.fromARGB(255, 71, 71, 71)),
+          ),
+          // border: OutlineInputBorder(
+          //     borderRadius: BorderRadius.circular(50),
+          //     borderSide: BorderSide.none),
         ),
       ),
+    );
+    final avlH = MediaQuery.of(context).size.height -
+        MediaQuery.of(context).padding.top -
+        appbar.preferredSize.height -
+        55;
+    final avlW = MediaQuery.of(context).size.width;
+    return Scaffold(
+      appBar: appbar,
       body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Container(
           width: double.infinity,
-          height: 515,
+          height: avlH * 0.75,
           child: ListView(
             children: [
               ...widget.interndetailsList.map((e) {
@@ -171,16 +176,16 @@ class _HomePageState extends State<HomePage> {
                 wordSpacing: 10,
                 // backgroundColor: Color.fromARGB(255, 104, 104, 104),
                 color: Color.fromARGB(255, 255, 98, 7),
-                fontSize: 22,
+                fontSize: avlH * 0.03,
                 fontFamily: 'Merriweather',
                 fontWeight: FontWeight.bold),
             textAlign: TextAlign.left,
           ),
         ),
         Container(
-          margin: EdgeInsets.all(5),
-          height: 145,
-          width: 380,
+          margin: EdgeInsets.only(left: 5, right: 5),
+          height: avlH * 0.21,
+          width: avlW,
           child: ListView(
             scrollDirection: Axis.horizontal,
             children: [

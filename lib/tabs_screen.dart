@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:palcmentor/Screen/favorite.dart';
 import 'package:palcmentor/Screen/profile.dart';
 import 'package:palcmentor/Screen/resources.dart';
+import 'package:palcmentor/main.dart';
 import './Screen/home.dart';
 import './widgets/profile_content_widget.dart';
 import './custom_animated_bottom_bar.dart';
@@ -64,107 +65,106 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     //final List<NewEntry> ent;
     return Scaffold(
+      // appBar: AppBar(
+      //   automaticallyImplyLeading: false,
+      //   title: Text("Welcome"),
+      //   backgroundColor: Colors.green[200],
+      // ),
+      body: StreamBuilder(
+        stream:
+            FirebaseFirestore.instance.collection('InternDetails').snapshots(),
+        builder: (BuildContext ctx, AsyncSnapshot<dynamic> snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Container(
+              width: double.maxFinite,
+              height: 500,
+              child: SpinKitCircle(
+                size: 60,
 
-        // appBar: AppBar(
-        //   automaticallyImplyLeading: false,
-        //   title: Text("Welcome"),
-        //   backgroundColor: Colors.green[200],
-        // ),
-        body: StreamBuilder(
-          stream: FirebaseFirestore.instance
-              .collection('InternDetails')
-              .snapshots(),
-          builder: (BuildContext ctx, AsyncSnapshot<dynamic> snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return Container(
-                width: double.maxFinite,
-                height: 500,
-                child: SpinKitCircle(
-                  size: 60,
-
-                  // controller: AnimationController(
-                  //   vsync: this,
-                  //   duration: const Duration(milliseconds: 1200),
-                  // ),
-                  itemBuilder: (BuildContext context, int index) {
-                    return DecoratedBox(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(50),
-                        color: index.isEven
-                            ? Colors.red
-                            : Color.fromARGB(255, 239, 199, 2),
-                      ),
-                    );
-                  },
-                ),
-              );
-            }
-            if (snapshot.hasError) {
-              return Text('Something went wrong');
-            }
-
-            // print(snapshot.data.document.length);
-            FirebaseFirestore.instance
-                .collection('me')
-                .snapshots()
-                .listen((event) {});
-
-            if (snapshot.data == null)
-              return Container(
-                width: double.maxFinite,
-                height: 500,
-                child: SpinKitSquareCircle(
-                  color: Colors.amber,
-                  size: 50,
-                  duration: Duration(seconds: 1),
-                ),
-                // child: SpinKitThreeInOut(
-                //   itemBuilder: (BuildContext context, int index) {
-                //     return DecoratedBox(
-                //       decoration: BoxDecoration(
-                //         color: index.isEven ? Colors.red : Colors.green,
-                //       ),
-                //     );
-                //   },
+                // controller: AnimationController(
+                //   vsync: this,
+                //   duration: const Duration(milliseconds: 1200),
                 // ),
-              );
-            ;
-            final InternDocoments = snapshot.data.docs;
+                itemBuilder: (BuildContext context, int index) {
+                  return DecoratedBox(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(50),
+                      color: index.isEven
+                          ? Colors.red
+                          : Color.fromARGB(255, 239, 199, 2),
+                    ),
+                  );
+                },
+              ),
+            );
+          }
+          if (snapshot.hasError) {
+            return Text('Something went wrong');
+          }
+
+          // print(snapshot.data.document.length);
+          FirebaseFirestore.instance
+              .collection('me')
+              .snapshots()
+              .listen((event) {});
+
+          if (snapshot.data == null)
+            return Container(
+              width: double.maxFinite,
+              height: 500,
+              child: SpinKitSquareCircle(
+                color: Colors.amber,
+                size: 50,
+                duration: Duration(seconds: 1),
+              ),
+              // child: SpinKitThreeInOut(
+              //   itemBuilder: (BuildContext context, int index) {
+              //     return DecoratedBox(
+              //       decoration: BoxDecoration(
+              //         color: index.isEven ? Colors.red : Colors.green,
+              //       ),
+              //     );
+              //   },
+              // ),
+            );
+          ;
+          final InternDocoments = snapshot.data.docs;
 //             const coll = collection(db, "");
 // const ss = await getCountFromServer(coll);
 // console.log('count: ', ss.data().count);
-            int length = 6;
-            FirebaseFirestore.instance
-                .collection('InternDetails')
-                .get()
-                .then((value) => {length = value.size});
-            // int Length = int.parse(FirebaseFirestore.instance
-            //     .collection('InternDetails')
-            //     .count()
-            //     .toString());
-            AsyncSnapshot.waiting();
-            interndetailsList = List.generate(
-              length,
-              ((index) {
-                return InternDetails(
-                    firm: InternDocoments[index]['firm'],
-                    jobD: InternDocoments[index]['jobD'],
-                    skill: InternDocoments[index]['skill'],
-                    img: InternDocoments[index]['img'],
-                    category: InternDocoments[index]['cat'],
-                    company: InternDocoments[index]['com'],
-                    todayDaaate: DateTime.fromMillisecondsSinceEpoch(
-                        InternDocoments[index]['date'].microsecondsSinceEpoch),
-                    package: InternDocoments[index]['pkg'],
-                    isfavorite: InternDocoments[index]['fav'],
-                    cloudID: InternDocoments[index].id);
-              }),
-              growable: true,
-            );
-            return getBody();
-          },
-        ),
-        bottomNavigationBar: buildBottomBar());
+          int length = 6;
+          FirebaseFirestore.instance
+              .collection('InternDetails')
+              .get()
+              .then((value) => {length = value.size});
+          // int Length = int.parse(FirebaseFirestore.instance
+          //     .collection('InternDetails')
+          //     .count()
+          //     .toString());
+          AsyncSnapshot.waiting();
+          interndetailsList = List.generate(
+            length,
+            ((index) {
+              return InternDetails(
+                  firm: InternDocoments[index]['firm'],
+                  jobD: InternDocoments[index]['jobD'],
+                  skill: InternDocoments[index]['skill'],
+                  img: InternDocoments[index]['img'],
+                  category: InternDocoments[index]['cat'],
+                  company: InternDocoments[index]['com'],
+                  todayDaaate: DateTime.fromMillisecondsSinceEpoch(
+                      InternDocoments[index]['date'].microsecondsSinceEpoch),
+                  package: InternDocoments[index]['pkg'],
+                  isfavorite: InternDocoments[index]['fav'],
+                  cloudID: InternDocoments[index].id);
+            }),
+            growable: true,
+          );
+          return getBody();
+        },
+      ),
+      bottomNavigationBar: buildBottomBar(),
+    );
   }
 
   Widget buildBottomBar() {
@@ -217,14 +217,7 @@ class _MyHomePageState extends State<MyHomePage> {
         interndetailsList: interndetailsList,
       ),
       FavoritList(interndetailsList: interndetailsList),
-      // Container(
-      //   alignment: Alignment.center,
-      //   child: const Text(
-      //     "favorite",
-      //     style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-      //   ),
-      // ),
-      Resources(),
+      const Resources(),
       MyProfile()
     ];
     return IndexedStack(
