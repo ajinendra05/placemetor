@@ -36,7 +36,7 @@ class ProfileContent extends StatelessWidget {
           Text(
             contentTitle,
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: const TextStyle(
               fontFamily: 'Oswald',
               fontWeight: FontWeight.w400,
               fontSize: 20,

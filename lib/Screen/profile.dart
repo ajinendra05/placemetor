@@ -6,26 +6,28 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:palcmentor/Providers/theme_provider.dart';
 import 'package:palcmentor/Screen/raiseaticket.dart';
 import 'package:palcmentor/Screen/tandpcontact.dart';
 import 'package:palcmentor/widgets/profile_content_widget.dart';
 import 'package:palcmentor/Screen/todo.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:provider/provider.dart';
 
 import 'login.dart';
 
-class MyProfile extends StatelessWidget {
+class MyProfile extends StatefulWidget {
   static const routeName = '/MyProfile';
   MyProfile({super.key});
-  bool isDark = false;
-  // Function changeTheem;
-  // List<Map<String, Object>> contentList = [
-  //   {'icon': Icons.add_card_outlined, 'title': 'To-Do'},
-  //   {'icon': Icons.add_card_outlined, 'title': 'To-Do'},
-  //   {'icon': Icons.add_card_outlined, 'title': 'To-Do'},
-  //   {'icon': Icons.add_card_outlined, 'title': 'To-Do'},
-  // ];
 
+  @override
+  State<MyProfile> createState() => _MyProfileState();
+}
+
+class _MyProfileState extends State<MyProfile> {
+  bool isDark = false;
+
+  // Function changeTheem;
   @override
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser;
@@ -47,7 +49,20 @@ class MyProfile extends StatelessWidget {
       });
     });
 
+    // Themes currentTheme = Provider.of<ThemeProvider>(context).getthemeIndex();
+    bool themeBoolValue = Provider.of<ThemeProvider>(context).getThemeBool();
+
     final appbar = AppBar(
+      actions: [
+        Switch(
+          value: themeBoolValue,
+          onChanged: (value) {
+            // Provider.of<ThemeProvider>(context, listen: false).setTheme(value);
+            context.read<ThemeProvider>().setTheme(value);
+          },
+          activeColor: Colors.grey.shade700,
+        ),
+      ],
       backgroundColor: Color.fromARGB(120, 96, 96, 93),
       // actions: [SwitchListTile(value: isDark, onChanged: onChanged)],
       title: Container(

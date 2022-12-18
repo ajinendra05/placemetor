@@ -1,12 +1,16 @@
 // import 'dart:ui';
+
+import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:palcmentor/Providers/theme_provider.dart';
 import 'package:palcmentor/Screen/home.dart';
 import 'package:palcmentor/tabs_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
+// import 'package:provider/provider.dart';
 
 import 'Screen/login.dart';
 import 'Screen/profile.dart';
@@ -19,7 +23,10 @@ import 'widgets/theme.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MyApp());
+  runApp(ChangeNotifierProvider(
+    create: ((context) => ThemeProvider()),
+    builder: (context, child) => MyApp(),
+  ));
 }
 
 final navigatorKey = GlobalKey<NavigatorState>();
@@ -43,11 +50,12 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations(
         [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+
     return MaterialApp(
       navigatorKey: navigatorKey,
       title: 'PLACEMENTOR',
       debugShowCheckedModeBanner: false,
-      theme: _isdark ? darkTheme : lightTheme,
+      theme: Provider.of<ThemeProvider>(context).getTheme(),
       home: StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
