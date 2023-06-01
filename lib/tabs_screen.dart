@@ -132,11 +132,11 @@ class _MyHomePageState extends State<MyHomePage> {
 //             const coll = collection(db, "");
 // const ss = await getCountFromServer(coll);
 // console.log('count: ', ss.data().count);
-          int length = 6;
-          FirebaseFirestore.instance
-              .collection('InternDetails')
-              .get()
-              .then((value) => {length = value.size});
+          int length = snapshot.data.docs.length;
+          // FirebaseFirestore.instance
+          //     .collection('InternDetails')
+          //     .get()
+          //     .then((value) => {length = value.size});
           // int Length = int.parse(FirebaseFirestore.instance
           //     .collection('InternDetails')
           //     .count()

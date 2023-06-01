@@ -50,19 +50,9 @@ class _MyProfileState extends State<MyProfile> {
     });
 
     // Themes currentTheme = Provider.of<ThemeProvider>(context).getthemeIndex();
-    bool themeBoolValue = Provider.of<ThemeProvider>(context).getThemeBool();
+    // bool themeBoolValue = Provider.of<ThemeProvider>(context).getThemeBool();
 
     final appbar = AppBar(
-      actions: [
-        Switch(
-          value: themeBoolValue,
-          onChanged: (value) {
-            // Provider.of<ThemeProvider>(context, listen: false).setTheme(value);
-            context.read<ThemeProvider>().setTheme(value);
-          },
-          activeColor: Colors.grey.shade700,
-        ),
-      ],
       backgroundColor: Color.fromARGB(120, 96, 96, 93),
       // actions: [SwitchListTile(value: isDark, onChanged: onChanged)],
       title: Container(

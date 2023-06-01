@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 final lightTheme = ThemeData(
-    scaffoldBackgroundColor: const Color(0xffF5F5F5),
+    scaffoldBackgroundColor: Color.fromARGB(255, 237, 236, 236),
     primaryColor: const Color(0xff0089EF),
-    cardColor: Colors.white,
+    cardColor: Color.fromARGB(255, 255, 255, 255),
     textTheme: TextTheme(titleLarge: TextStyle(color: Colors.black)),
     snackBarTheme: SnackBarThemeData(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),

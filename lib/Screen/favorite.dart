@@ -10,7 +10,7 @@ class FavoritList extends StatelessWidget {
   final List<InternDetails> interndetailsList;
   final List<InternDetails> favoriteIntern = [];
   void FavListGenerator() {
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < interndetailsList.length; i++) {
       if (interndetailsList[i].isfavorite) {
         favoriteIntern.add(interndetailsList[i]);
       }
